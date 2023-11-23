@@ -10,7 +10,7 @@ def index():
         job = request.form.get('job')
         jobs.append(job)
         return redirect(url_for('index'))
-    return render_template('index.html', jobs=jobs)
+    return render_template('templates/index.html', jobs=jobs)
 
 if __name__ == '__main__':
     app.run(debug=True)
