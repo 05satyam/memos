@@ -10,7 +10,7 @@ class FlaskAppTestCase(unittest.TestCase):
     def setUp(self):
         self.redis_patcher = mock.patch('main.redis_client', fakeredis.FakeStrictRedis())
         self.redis_patcher.start()
-        app.redis_client = main.redis.Redis()
+        app.redis_client = main.redis.Redis(decode_responses=True)
         main.app.testing = True
         self.app = main.app.test_client()
 
