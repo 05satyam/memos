@@ -7,10 +7,11 @@ import fakeredis
 class FlaskAppTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.redis_patcher = mock.patch('app.redis_client', fakeredis.FakeStrictRedis())
-        self.redis_patcher.start()
+
         app.config['TESTING'] = True
         self.app = app.test_client()
+        self.redis_patcher = mock.patch('app.redis_client', fakeredis.FakeStrictRedis())
+        self.redis_patcher.start()
 
     def tearDown(self):
         self.redis_patcher.stop()
