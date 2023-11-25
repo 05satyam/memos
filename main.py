@@ -5,6 +5,9 @@ import json
 app = Flask(__name__)
 redis_client = redis.Redis(host='localhost', port=6379, db=0)
 
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/add', methods=['POST'])
 def add_job():
