@@ -1,18 +1,19 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8">
     <title>Job Tracker</title>
 </head>
 <body>
-    <h2>Memos</h2>
-    <form method="POST">
-        <input type="text" name="job" placeholder="Enter a new job" required>
+    <h1>Job Tracker</h1>
+    <form method="post" action="/add">
+        <input type="text" name="title" placeholder="Job Title" required>
+        <input type="text" name="company" placeholder="Company" required>
+        <input type="text" name="status" placeholder="Status" required>
         <button type="submit">Add Job</button>
     </form>
     <ul>
         {% for job in jobs %}
-        <li>{{ job }}</li>
+            <li>{{ job.title }} at {{ job.company }} - {{ job.status }}</li>
         {% endfor %}
     </ul>
 </body>
