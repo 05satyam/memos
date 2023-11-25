@@ -8,7 +8,7 @@ app = Flask(__name__)
 # url = urlparse(os.environ.get("REDIS_URL"))
 # redis_client = redis.Redis(host=url.hostname, port=url.port, username=url.username, password=url.password, ssl=True, ssl_cert_reqs=None)
 
-url = urlparse.urlparse(os.environ.get('REDISCLOUD_URL'))
+url = urlparse(os.environ.get('REDISCLOUD_URL'))
 redis_client = redis.Redis(host=url.hostname, port=url.port, password=url.password)
 
 @app.route('/')
