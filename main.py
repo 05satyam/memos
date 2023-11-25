@@ -23,6 +23,10 @@ def add_job():
         'company': request.form['company'],
         'status': request.form['status']
     }
+    for key in new_job:
+        if not isinstance(new_job[key], str):
+            new_job[key] = json.dumps(new_job[key])
+
     print("new_job ", new_job)
     redis_client.hset(f'job:{job_id}', mapping=new_job)
     return render_template('index.html')
@@ -38,9 +42,9 @@ def get_jobs():
     for job_id in job_ids:
         job_data = redis_client.hgetall(f'job:{job_id}')
         print("job data ", job_data)
-        job_data = job_data.decode("utf-8")
-        print("job_data  1 - ", job_data)
-        jobs.append({key.decode("utf-8"): value.decode("utf-8") for key, value in job_data.items()})
+        retrieved_job = {key.decode('utf-8'): value.decode('utf-8') for key, value in job_data.items()}
+        print("jretrieved_job ", retrieved_job)
+        jobs.append(retrieved_job)
 
     print(jobs)
     return render_template('index.html', jobs=jobs)
