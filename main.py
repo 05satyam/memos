@@ -23,8 +23,9 @@ def add_job():
         'company': request.form['company'],
         'status': request.form['status']
     }
-
+    print("new_job ", new_job)
     redis_client.hset(f'job:{job_id}', mapping=new_job)
+    print(redis_client.hgetall(f'job:{job_id.decode("utf-8")}'))
     return render_template('index.html')
 
 
