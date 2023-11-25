@@ -9,7 +9,7 @@ app = Flask(__name__)
 # redis_client = redis.Redis(host=url.hostname, port=url.port, username=url.username, password=url.password, ssl=True, ssl_cert_reqs=None)
 
 url = urlparse(os.environ.get('REDISCLOUD_URL'))
-redis_client = redis.Redis(host=url.hostname, port=url.port, password=url.password,  decode_responses=True)
+redis_client = redis.Redis(host=url.hostname, port=url.port, password=url.password)
 
 
 
@@ -43,7 +43,7 @@ def get_jobs():
         print(f'{job_id}')
         job_data = redis_client.hgetall(f'{job_id}')
         print("job data ", job_data)
-        retrieved_job = {key: value for key, value in job_data.items()}
+        retrieved_job = {key.decode('utf-8'): value.decode('utf-8') for key, value in job_data.items()}
         print("jretrieved_job ", retrieved_job)
         jobs.append(retrieved_job)
 
