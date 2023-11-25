@@ -37,7 +37,7 @@ def get_jobs():
     # Fetch all job IDs
     job_ids = redis_client.keys('*')
 
-    print(job_ids)
+    print("job_ids ", job_ids)
     jobs = []
     for job_id in job_ids:
         job_data = redis_client.hgetall(f'job:{job_id}')
