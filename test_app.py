@@ -7,7 +7,7 @@ import fakeredis
 class FlaskAppTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.redis_patcher = unittest.mock.patch('redis.Redis', fakeredis.FakeStrictRedis())
+        self.redis_patcher = mock.patch('redis.Redis', fakeredis.FakeStrictRedis())
         self.redis_patcher.start()
         app.redis_client = app.redis.Redis()
         app.app.testing = True
