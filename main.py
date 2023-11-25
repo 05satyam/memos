@@ -11,9 +11,7 @@ app = Flask(__name__)
 url = urlparse(os.environ.get('REDISCLOUD_URL'))
 redis_client = redis.Redis(host=url.hostname, port=url.port, password=url.password)
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+
 
 @app.route('/add', methods=['POST'])
 def add_job():
@@ -27,20 +25,20 @@ def add_job():
     }
 
     redis_client.hset(f'job:{job_id}', mapping=new_job)
-    return jsonify(new_job), 201
+    return redirect(url_for('index'))
 
 
-@app.route('/jobs')
+@app.route('/')
 def get_jobs():
     # Fetch all job IDs
-    job_ids = redis_client.lrange('jobs', 0, -1)
+    job_ids = redis_client.lrange('job', 0, -1)
 
     jobs = []
     for job_id in job_ids:
         job_data = redis_client.hgetall(f'job:{job_id.decode("utf-8")}')
         jobs.append({key.decode("utf-8"): value.decode("utf-8") for key, value in job_data.items()})
 
-    return jsonify(jobs)
+    return render_template('index.html', jobs=jobs)
 
 
 if __name__ == '__main__':

@@ -11,12 +11,14 @@
         <input type="text" name="status" placeholder="Status" required>
         <button type="submit">Add Job</button>
     </form>
+
     <ul>
         {% for job in jobs %}
-            <li>{{ job.title }} at {{ job.company }} - {{ job.status }}</li>
+            <li>{{ job.title }} at {{ job.company }} - Status: {{ job.status }}</li>
+        {% else %}
+            <li>No jobs found.</li>
         {% endfor %}
     </ul>
-
     <a href="/"><button>Home</button></a>
 </body>
 </html>
