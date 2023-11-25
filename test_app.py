@@ -19,7 +19,7 @@ class FlaskAppTestCase(unittest.TestCase):
 
     def test_add_job(self):
         response = self.app.post('/add', data={'title': 'Test Job', 'company': 'Test Company', 'status': 'Open'})
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     def test_get_jobs(self):
         self.app.post('/add', data={'title': 'Test Job', 'company': 'Test Company', 'status': 'Open'})
