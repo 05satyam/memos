@@ -31,7 +31,7 @@ def add_job():
 @app.route('/')
 def get_jobs():
     # Fetch all job IDs
-    job_ids = redis_client.lrange('jobs', 0, -1)
+    job_ids = redis_client.keys('*')
     print()
     jobs = []
     for job_id in job_ids:
