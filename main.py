@@ -8,8 +8,8 @@ app = Flask(__name__)
 # url = urlparse(os.environ.get("REDIS_URL"))
 # redis_client = redis.Redis(host=url.hostname, port=url.port, username=url.username, password=url.password, ssl=True, ssl_cert_reqs=None)
 
-redis_url = os.getenv('REDIS_URL', 'redis://localhost:6379')
-redis_client = redis.from_url(redis_url)
+# redis_url = os.getenv('REDIS_URL', 'redis://localhost:6379')
+redis_client = redis.from_url(os.environ.get("REDIS_URL"))
 @app.route('/')
 def index():
     return render_template('index.html')
