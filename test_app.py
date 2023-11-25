@@ -23,7 +23,7 @@ class FlaskAppTestCase(unittest.TestCase):
 
     def test_get_jobs(self):
         self.app.post('/add', data={'title': 'Test Job', 'company': 'Test Company', 'status': 'Open'})
-        response = self.app.get('/jobs')
+        response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
 
 
