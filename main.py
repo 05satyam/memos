@@ -1,9 +1,13 @@
 from flask import Flask, request, jsonify, render_template, request, redirect, url_for
 import redis
 import json
+import os
+from urllib.parse import urlparse
 
 app = Flask(__name__)
-redis_client = redis.Redis(host='localhost', port=6379, db=0)
+url = urlparse(os.environ.get("REDIS_URL"))
+redis_client = redis.Redis(host=url.hostname, port=url.port, username=url.username, password=url.password, ssl=True, ssl_cert_reqs=None)
+
 
 @app.route('/')
 def index():
