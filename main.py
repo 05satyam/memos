@@ -38,8 +38,10 @@ def get_jobs():
     job_ids = redis_client.keys('*')
 
     print("job_ids ", job_ids)
+    decoded_job_ids = [job_id.decode('utf-8') for job_id in job_ids]
+    print("decoded_job_ids ", decoded_job_ids)
     jobs = []
-    for job_id in job_ids:
+    for job_id in decoded_job_ids:
         print(f'{job_id}')
         job_data = redis_client.hgetall(f'{job_id}')
         print("job data ", job_data)
