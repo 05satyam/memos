@@ -32,10 +32,14 @@ def add_job():
 def get_jobs():
     # Fetch all job IDs
     job_ids = redis_client.keys('*')
-    print()
+
+    print(job_ids)
     jobs = []
     for job_id in job_ids:
-        job_data = redis_client.hgetall(f'job:{job_id.decode("utf-8")}')
+        job_data = redis_client.hgetall(f'job:{job_id}')
+        print("job data ", job_data)
+        job_data = job_data.decode("utf-8")
+        print("job_data  1 - ", job_data)
         jobs.append({key.decode("utf-8"): value.decode("utf-8") for key, value in job_data.items()})
 
     print(jobs)
