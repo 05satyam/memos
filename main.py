@@ -32,12 +32,13 @@ def add_job():
 def get_jobs():
     # Fetch all job IDs
     job_ids = redis_client.lrange('jobs', 0, -1)
-
+    print()
     jobs = []
     for job_id in job_ids:
         job_data = redis_client.hgetall(f'job:{job_id.decode("utf-8")}')
         jobs.append({key.decode("utf-8"): value.decode("utf-8") for key, value in job_data.items()})
 
+    print(jobs)
     return render_template('index.html', jobs=jobs)
 
 
