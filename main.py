@@ -9,7 +9,7 @@ app = Flask(__name__)
 # redis_client = redis.Redis(host=url.hostname, port=url.port, username=url.username, password=url.password, ssl=True, ssl_cert_reqs=None)
 
 url = urlparse(os.environ.get('REDISCLOUD_URL'))
-redis_client = redis.Redis(host=url.hostname, port=url.port, password=url.password)
+redis_client = redis.Redis(host=url.hostname, port=url.port, password=url.password,  decode_responses=True)
 
 
 
