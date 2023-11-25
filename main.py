@@ -29,7 +29,7 @@ def add_job():
 
     print("new_job ", new_job)
     redis_client.hset(f'job:{job_id}', mapping=new_job)
-    return render_template('index.html')
+    return redirect(url_for('/'))
 
 
 @app.route('/')
