@@ -25,7 +25,6 @@ def add_job():
     }
     print("new_job ", new_job)
     redis_client.hset(f'job:{job_id}', mapping=new_job)
-    print(redis_client.hgetall(f'job:{job_id.decode("utf-8")}'))
     return render_template('index.html')
 
 
