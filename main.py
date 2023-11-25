@@ -38,7 +38,9 @@ def get_jobs():
     job_ids = redis_client.keys('*')
 
     print("job_ids ", job_ids)
-    decoded_job_ids = [job_id.decode('utf-8') for job_id in job_ids]
+    decoded_job_ids = [job_id.decode('utf-8') if isinstance(job_id, bytes) and len(job_id.split(b':')) > 1 else job_id
+                       for job_id in job_ids]
+
     print("decoded_job_ids ", decoded_job_ids)
     jobs = []
     for job_id in decoded_job_ids:
