@@ -8,3 +8,9 @@
 * Test cases will run as soon as commit is done to master branch.
 
 * _Heroku_ auto-deployment has been setup which will run when **test coverage == 100%** .
+
+* Implemented in-memory cache using reids
+
+* Data is fetched from redis and added to the cache as you submit the request
+
+* This web-app is done for practicing CI/CD, in-memory cache, deployement strategies and flask api.
