@@ -27,7 +27,7 @@ def add_job():
         if not isinstance(new_job[key], str):
             new_job[key] = json.dumps(new_job[key])
 
-    print("new_job ", new_job)
+    #print("new_job ", new_job)
     redis_client.hset(f'job:{job_id}', mapping=new_job)
     return redirect(url_for('get_jobs'))
 
@@ -44,14 +44,15 @@ def get_jobs():
     print("decoded_job_ids ", decoded_job_ids)
     jobs = []
     for job_id in decoded_job_ids:
-        print(f'{job_id}')
+        #print(f'{job_id}')
         job_data = redis_client.hgetall(f'{job_id}')
-        print("job data ", job_data)
+        #print("job data ", job_data)
         retrieved_job = {key.decode('utf-8'): value.decode('utf-8') for key, value in job_data.items()}
-        print("jretrieved_job ", retrieved_job)
-        jobs.append(retrieved_job)
+        #print("jretrieved_job ", retrieved_job)
+        if(len(retrieved_job)>1):
+            jobs.append(retrieved_job)
 
-    print(jobs)
+    #print(jobs)
     return render_template('index.html', jobs=jobs)
 
 
